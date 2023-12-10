@@ -51,16 +51,22 @@ public class Documents {
           Collections.sort(weights, 1)
           print(weights)
         */
-        double similarity;
-        double idfValue ;
+
+        double idfValue;
         for (int i = 0; i < numberOfRecords; i++) {
+            double similarity = 0;
             for (String queryWord : Arrays.asList(query)) {
                 idfValue = idfCalculator(queryWord);
+                double docWeight = countValues(queryWord, i) * idfValue;
+                double queryWeight = countValues(queryWord) * idfValue;
+                similarity += (docWeight * queryWeight);
             }
-
-
+            result.put("D" + (i + 1), similarity);
+            similarity = 0;
 
         }
+        System.out.println(result);
+        rank(result);
     }
 
     public double idfCalculator(String word) {
@@ -88,5 +94,15 @@ public class Documents {
         return count;
     }
 
+    private void rank(Map<String, Double> unsortedMap) {
+        List<Map.Entry<String, Double>> entryList = new ArrayList<>(result.entrySet());
+
+        Collections.sort(entryList, Map.Entry.comparingByValue(Comparator.reverseOrder()));
+        System.out.println("\nSorted by Values:");
+        for (Map.Entry<String, Double> entry : entryList) {
+            System.out.print(entry.getKey() + " ");
+        }
+        System.out.println(".");
+    }
 
 }
