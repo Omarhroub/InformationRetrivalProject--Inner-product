@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class Documents {
+public class InnerProductCalculator {
     private Scanner scanner = new Scanner(System.in);
     private ArrayList<String[]> corpus = new ArrayList<>();
     String[] query;
