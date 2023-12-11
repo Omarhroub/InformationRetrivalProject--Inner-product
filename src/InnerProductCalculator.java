@@ -1,11 +1,29 @@
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.*;
 
 public class InnerProductCalculator {
-    private Scanner scanner = new Scanner(System.in);
-    private ArrayList<String[]> corpus = new ArrayList<>();
+    private final Scanner scanner = new Scanner(System.in);
+    private final ArrayList<String[]> corpus = new ArrayList<>();
     String[] query;
     double numberOfRecords;
     Map<String, Double> result = new HashMap<>();
+
+    public void insertFromFile() {
+        numberOfRecords = 3;
+        String filePath = "C:\\Users\\Omar\\IdeaProjects\\EnhancedInnerProduct\\src\\Doc";
+        for (int i = 1; i < 4; i++) {
+            try {
+                BufferedReader reader = new BufferedReader(new FileReader(filePath + i + ".txt"));
+                String[] fileContent = reader.readLine().toUpperCase().split(" ");
+                corpus.add(fileContent);
+                reader.close();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
 
     public void insertDocuments() {
         System.out.print("How many records would you like to enter: ");
@@ -13,14 +31,16 @@ public class InnerProductCalculator {
         scanner.nextLine();
         for (int i = 1; i <= numberOfRecords; i++) {
             System.out.println("Enter record number " + i + ": ");
-            String[] userInput = scanner.nextLine().split(" ");
+            String recTemp = scanner.nextLine().toUpperCase();
+            String[] userInput = recTemp.split(" ");
             corpus.add(userInput);
         }
     }
 
     public void insertQuery() {
         System.out.println("Enter your query");
-        query = scanner.nextLine().split(" ");
+        String queryTemp = scanner.nextLine().toUpperCase();
+        query = queryTemp.split(" ");
     }
 
     public void printQuery() {
@@ -60,7 +80,9 @@ public class InnerProductCalculator {
                 double docWeight = countValues(queryWord, i) * idfValue;
                 double queryWeight = countValues(queryWord) * idfValue;
                 similarity += (docWeight * queryWeight);
+                System.out.println(similarity);
             }
+            System.out.println("___________________________");
             result.put("D" + (i + 1), similarity);
             similarity = 0;
 
