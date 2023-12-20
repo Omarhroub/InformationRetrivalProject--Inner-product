@@ -13,7 +13,6 @@ public class Main {
 
         InnerProductCalculator ex = new InnerProductCalculator();
         ex.insertFromFile();
-
         ex.printDocuments();
         ex.insertQuery();
         ex.innerProductFunction();

@@ -13,16 +13,29 @@ public class InnerProductCalculator {
     public void insertFromFile() {
         numberOfRecords = 3;
         String filePath = "C:\\Users\\Omar\\IdeaProjects\\EnhancedInnerProduct\\src\\Doc";
-        for (int i = 1; i < 4; i++) {
+        for (int i = 1; i < numberOfRecords + 1; i++) {
+            String[] arr;
+            String line = "";
+            String temp = "";
+
             try {
                 BufferedReader reader = new BufferedReader(new FileReader(filePath + i + ".txt"));
-                String[] fileContent = reader.readLine().toUpperCase().split(" ");
-                corpus.add(fileContent);
-                reader.close();
+                while ((line = reader.readLine()) != null) {
+                    if (!temp.isEmpty()) {
+                        temp = temp + " ";
+                    }
+                    temp = temp + line;
+                }
+                temp = temp.toUpperCase().trim();
+                arr = temp.split("[,\\s]+");
+                corpus.add(arr);
+
             } catch (IOException e) {
-                throw new RuntimeException(e);
+                e.printStackTrace();
             }
+
         }
+
     }
 
     public void insertDocuments() {
