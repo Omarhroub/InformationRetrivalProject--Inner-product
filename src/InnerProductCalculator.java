@@ -1,4 +1,5 @@
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.*;
@@ -7,40 +8,43 @@ public class InnerProductCalculator {
     private final Scanner scanner = new Scanner(System.in);
     private final ArrayList<String[]> corpus = new ArrayList<>();
     String[] query;
-    double numberOfRecords;
     Map<String, Double> result = new HashMap<>();
 
     public void insertFromFile() {
-        numberOfRecords = 10;
-        String filePath = "C:\\Users\\Omar\\IdeaProjects\\EnhancedInnerProduct\\src\\Doc";
-        for (int i = 1; i < numberOfRecords + 1; i++) {
-            String[] arr;
-            String line = "";
-            String temp = "";
+        File folder = new File("Docs");
+        File[] listOfFiles = folder.listFiles();
 
-            try {
-                BufferedReader reader = new BufferedReader(new FileReader(filePath + i + ".txt"));
-                while ((line = reader.readLine()) != null) {
-                    if (!temp.isEmpty()) {
-                        temp = temp + " ";
+        for (int i = 0; i < listOfFiles.length; i++) {
+            if (listOfFiles[i].isFile()) {
+                String[] arr;
+                String line = "";
+                String temp = "";
+
+                try {
+                    BufferedReader reader = new BufferedReader(new FileReader("Docs\\"  + listOfFiles[i].getName()));
+                    while ((line = reader.readLine()) != null) {
+                        if (!temp.isEmpty()) {
+                            temp = temp + " ";
+                        }
+                        temp = temp + line;
                     }
-                    temp = temp + line;
+                    temp = temp.toUpperCase().trim();
+                    arr = temp.split("[!?,\\s\\.]+");
+                    corpus.add(arr);
+
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
-                temp = temp.toUpperCase().trim();
-                arr = temp.split("[,\\s]+");
-                corpus.add(arr);
-
-            } catch (IOException e) {
-                e.printStackTrace();
             }
-
         }
+
+
 
     }
 
     public void insertDocuments() {
         System.out.print("How many records would you like to enter: ");
-        numberOfRecords = scanner.nextInt();
+        int numberOfRecords = scanner.nextInt();
         scanner.nextLine();
         for (int i = 1; i <= numberOfRecords; i++) {
             System.out.println("Enter record number " + i + ": ");
@@ -86,7 +90,7 @@ public class InnerProductCalculator {
         */
 
         double idfValue;
-        for (int i = 0; i < numberOfRecords; i++) {
+        for (int i = 0; i < corpus.size(); i++) {
             double similarity = 0;
             for (String queryWord : Arrays.asList(query)) {
                 idfValue = idfCalculator(queryWord);
@@ -115,7 +119,7 @@ public class InnerProductCalculator {
         if (mentionedRecords == 0) {
             return 0;
         }
-        return Math.log10(numberOfRecords / mentionedRecords);
+        return Math.log10(corpus.size() / mentionedRecords);
     }
 
     public int countValues(String search, int i) {
@@ -140,6 +144,7 @@ public class InnerProductCalculator {
         }
         System.out.println(".");
     }
+
     public static double normalize(double value, double minValue, double maxValue) {
         return (value - minValue) / (maxValue - minValue);
     }
