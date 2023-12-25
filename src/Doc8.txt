@@ -1,0 +1,11 @@
+5G technology represents the fifth generation of mobile networks, offering higher data speeds, lower latency, and increased capacity. The deployment of 5G networks is expected to transform communication, connectivity, and technological innovation.
+
+Enhanced Mobile Broadband (eMBB) is one of the key features of 5G, providing faster download and upload speeds. This enables high-quality streaming, augmented reality applications, and improved overall user experiences.
+
+Low Latency Communication (URLLC) in 5G networks reduces communication delays, making it suitable for applications that require real-time responsiveness. URLLC is crucial for autonomous vehicles, remote surgeries, and industrial automation.
+
+Massive Machine Type Communication (mMTC) supports the connectivity of a vast number of devices, contributing to the Internet of Things (IoT). mMTC facilitates the deployment of smart cities, smart grids, and connected infrastructure.
+
+5G technology introduces network slicing, allowing the creation of virtualized, customized networks for specific use cases. This enables efficient resource allocation and tailored network configurations.
+
+The rollout of 5G networks involves challenges such as infrastructure deployment, spectrum allocation, and addressing potential health concerns. Ongoing research and collaboration among stakeholders aim to maximize the benefits of 5G technology while addressing associated challenges.

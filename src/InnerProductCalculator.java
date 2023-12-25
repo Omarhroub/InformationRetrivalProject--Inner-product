@@ -11,7 +11,7 @@ public class InnerProductCalculator {
     Map<String, Double> result = new HashMap<>();
 
     public void insertFromFile() {
-        numberOfRecords = 3;
+        numberOfRecords = 10;
         String filePath = "C:\\Users\\Omar\\IdeaProjects\\EnhancedInnerProduct\\src\\Doc";
         for (int i = 1; i < numberOfRecords + 1; i++) {
             String[] arr;
@@ -93,9 +93,10 @@ public class InnerProductCalculator {
                 double docWeight = countValues(queryWord, i) * idfValue;
                 double queryWeight = countValues(queryWord) * idfValue;
                 similarity += (docWeight * queryWeight);
-                System.out.println(similarity);
+//                System.out.println(similarity);
             }
-            System.out.println("___________________________");
+//            System.out.println("___________________________");
+//            double normalizedSimilarity = normalize(similarity,0.0,20.0);
             result.put("D" + (i + 1), similarity);
             similarity = 0;
 
@@ -138,6 +139,9 @@ public class InnerProductCalculator {
             System.out.print(entry.getKey() + " ");
         }
         System.out.println(".");
+    }
+    public static double normalize(double value, double minValue, double maxValue) {
+        return (value - minValue) / (maxValue - minValue);
     }
 
 }
