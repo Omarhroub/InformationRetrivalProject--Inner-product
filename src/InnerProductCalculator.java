@@ -7,6 +7,7 @@ import java.util.*;
 public class InnerProductCalculator {
     private final Scanner scanner = new Scanner(System.in);
     private final ArrayList<String[]> corpus = new ArrayList<>();
+    private final ArrayList<String> fileNames = new ArrayList<>();
     String[] query;
     Map<String, Double> result = new HashMap<>();
 
@@ -15,6 +16,7 @@ public class InnerProductCalculator {
         File[] listOfFiles = folder.listFiles();
 
         for (int i = 0; i < listOfFiles.length; i++) {
+            fileNames.add(listOfFiles[i].getName());
             if (listOfFiles[i].isFile()) {
                 String[] arr;
                 String line = "";
@@ -67,8 +69,8 @@ public class InnerProductCalculator {
     }
 
     public void printDocuments() {
-        for (String[] array : corpus) {
-            System.out.println(Arrays.toString(array));
+        for (int i = 0; i < corpus.size(); i++) {
+            System.out.println(fileNames.get(i) + ": " + Arrays.toString(corpus.get(i)));
         }
     }
 
@@ -101,7 +103,7 @@ public class InnerProductCalculator {
             }
 //            System.out.println("___________________________");
 //            double normalizedSimilarity = normalize(similarity,0.0,20.0);
-            result.put("D" + (i + 1), similarity);
+            result.put(fileNames.get(i) , similarity);
             similarity = 0;
 
         }
