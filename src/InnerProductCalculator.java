@@ -138,11 +138,13 @@ public class InnerProductCalculator {
         List<Map.Entry<String, Double>> entryList = new ArrayList<>(result.entrySet());
 
         Collections.sort(entryList, Map.Entry.comparingByValue(Comparator.reverseOrder()));
-        System.out.println("\nSorted by Values:");
+        System.out.println("\nRetrieved Docs:");
         for (Map.Entry<String, Double> entry : entryList) {
-            System.out.print(entry.getKey() + " ");
+            if(entry.getValue() == 0){
+                continue;
+            }
+            System.out.println(entry.getKey() );
         }
-        System.out.println(".");
     }
 
     public static double normalize(double value, double minValue, double maxValue) {
