@@ -71,6 +71,7 @@ public class InnerProductCalculator {
     public void printDocuments() {
         for (int i = 0; i < corpus.size(); i++) {
             System.out.println(fileNames.get(i) + ": " + Arrays.toString(corpus.get(i)));
+            System.out.println("----------------------------------------------------");
         }
     }
 
